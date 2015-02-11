@@ -87,7 +87,15 @@ class Order extends Application {
         $this->data['title'] = 'Checking Out';
         $this->data['pagebody'] = 'show_order';
         $this->data['order_num'] = $order_num;
-        //FIXME
+        $this->data['total'] = money_format('%n', $this->orders->total($order_num));
+        $items = $this->orderitems->group($order_num);
+
+        foreach ($items as $item) {
+          $menuitem = $this->menu->get($item->item);
+          $item->code = $menuitem->name;
+        }
+
+        $this->data['items'] = $items;
 
         $this->render();
     }
