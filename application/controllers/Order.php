@@ -19,9 +19,9 @@ class Order extends Application {
     function neworder() {
         $order_num = $this->orders->highest() + 1;
 
-        $neworders = $this->orders->create();
-        $neworders->num = $order_num;
-        $neworder->date = date();
+        $neworder = $this->orders->create();
+        $neworder->num = $order_num;
+        $neworder->date = date("Y-m-d H:i:s");
         $neworder->status = 'a';
         $neworder->total = 0;
         $this->orders->add($neworder);
@@ -36,7 +36,8 @@ class Order extends Application {
 
         $this->data['pagebody'] = 'show_menu';
         $this->data['order_num'] = $order_num;
-        //FIXME
+        $total = $this->orders->total($order_num);
+        $this->data['title'] = "Order # $order_num ($total)";
 
         // Make the columns
         $this->data['meals'] = $this->make_column('m');
