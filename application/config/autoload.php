@@ -141,7 +141,7 @@ $autoload['language'] = array();
 */
 
 $autoload['model'] = array(
-  'Menu',
-  'Orderitems',
-  'Orders',
+  'menu',
+  'orderitems',
+  'orders',
 );
